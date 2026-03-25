@@ -37,6 +37,16 @@ const display = document.querySelector(".display");
 const buttons = document.querySelector(".buttons");
 
 buttons.addEventListener("click", (evt) => {
-  operand1 = evt.target.textContent;
-  display.textContent += operand1;
+  display.textContent = evt.target.classList.contains("operator")
+    ? ""
+    : display.textContent + evt.target.textContent;
+});
+
+const operators = document.querySelectorAll(".operator");
+operators.forEach((operatorBtn) => {
+  operatorBtn.addEventListener("click", (evt) => {
+    operand1 = Number(display.textContent);
+    operator = evt.target.textContent;
+    display.textContent = "";
+  });
 });
