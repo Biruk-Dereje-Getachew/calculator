@@ -32,3 +32,11 @@ function operate(num1, num2, operator) {
       break;
   }
 }
+
+const display = document.querySelector(".display");
+const buttons = document.querySelector(".buttons");
+
+buttons.addEventListener("click", (evt) => {
+  operand1 = evt.target.textContent;
+  display.textContent += operand1;
+});
