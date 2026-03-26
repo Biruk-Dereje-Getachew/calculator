@@ -37,16 +37,18 @@ const buttonsContaniner = document.querySelector(".buttons");
 buttonsContaniner.addEventListener(
   "click",
   (evt) => {
-    if (clearOnTextInput) {
-      display.textContent = "";
-      clearOnTextInput = false;
-    }
+    if (!evt.target.classList.contains("buttons")) {
+      if (clearOnTextInput) {
+        display.textContent = "";
+        clearOnTextInput = false;
+      }
 
-    display.textContent +=
-      evt.target.classList.contains("operator") ||
-      evt.target.classList.contains("equals")
-        ? ""
-        : evt.target.textContent;
+      display.textContent +=
+        evt.target.classList.contains("operator") ||
+        evt.target.classList.contains("equals")
+          ? ""
+          : evt.target.textContent;
+    }
   },
   true,
 );
