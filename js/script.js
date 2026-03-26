@@ -91,9 +91,9 @@ const equalsBtn = document.querySelector(".equals");
 equalsBtn.addEventListener("click", (evt) => {
   if (operand1 && display.textContent) {
     operand2 = Number(display.textContent);
-    const result = operate(operand1, operand2, operator);
-    display.textContent = result;
-    operand1 = operand2 = null;
+    operand1 = operate(operand1, operand2, operator);
+    display.textContent = operand1;
+    operand2 = null;
     operator = null;
     clearOnTextInput = true;
   }
