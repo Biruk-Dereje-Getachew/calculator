@@ -16,6 +16,7 @@ function divide(num1, num2) {
 
 let operand1, operator, operand2;
 let clearOnTextInput = false;
+let waitingForSecondInput = true;
 
 function operate(num1, num2, operator) {
   switch (operator) {
@@ -52,17 +53,21 @@ const operators = document.querySelectorAll(".operator");
 
 operators.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", (evt) => {
-    operator = evt.target.textContent;
     if (!operand1 && !operand2) {
+      operator = evt.target.textContent;
       operand1 = Number(display.textContent);
       display.textContent = "";
     } else if (!operand2 && operand1) {
-      operand2 = Number(display.textContent);
-      operand1 = operate(operand1, operand2, operator);
-      display.textContent = operand1;
-      clearOnTextInput = true;
-      operand2 = null;
-      debugger;
+      if (display.textContent) {
+        operand2 = Number(display.textContent);
+        operand1 = operate(operand1, operand2, operator);
+        operator = evt.target.textContent;
+        display.textContent = operand1;
+        clearOnTextInput = true;
+        operand2 = null;
+      } else {
+        operator = evt.target.textContent;
+      }
     }
   });
 });
