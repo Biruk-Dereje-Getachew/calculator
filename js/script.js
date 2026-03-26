@@ -32,9 +32,9 @@ function operate(num1, num2, operator) {
 }
 
 const display = document.querySelector(".display");
-const buttons = document.querySelector(".buttons");
+const buttonsContaniner = document.querySelector(".buttons");
 
-buttons.addEventListener(
+buttonsContaniner.addEventListener(
   "click",
   (evt) => {
     if (clearOnTextInput) {
@@ -90,7 +90,6 @@ equalsBtn.addEventListener("click", (evt) => {
   if (operand1 && display.textContent) {
     operand2 = Number(display.textContent);
     const result = operate(operand1, operand2, operator);
-    console.log(operand1, operand2, operator);
     display.textContent = result;
     operand1 = operand2 = null;
     operator = null;
