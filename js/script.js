@@ -96,3 +96,29 @@ equalsBtn.addEventListener("click", (evt) => {
     clearOnTextInput = true;
   }
 });
+
+let r, g, b;
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("mousedown", (evt) => {
+    let target = evt.target;
+    let bgColor = window.getComputedStyle(target).backgroundColor;
+    [r, g, b] = bgColor.slice(4, -1).split(", ");
+    [r, g, b] = [Number(r), Number(g), Number(b)];
+    const factor = 0.5;
+    [r, g, b] = [r * factor, g * factor, b * factor];
+    target.style.backgroundColor = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+  });
+});
+
+buttons.forEach((button) => {
+  button.addEventListener("mouseup", (evt) => {
+    let target = evt.target;
+    let bgColor = window.getComputedStyle(target).backgroundColor;
+    [r, g, b] = bgColor.slice(4, -1).split(", ");
+    [r, g, b] = [Number(r), Number(g), Number(b)];
+    const factor = 0.5;
+    [r, g, b] = [r / factor, g / factor, b / factor];
+    target.style.backgroundColor = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+  });
+});
