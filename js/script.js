@@ -63,12 +63,18 @@ operators.forEach((operatorBtn) => {
       display.textContent = "";
     } else if (!operand2 && operand1) {
       if (display.textContent) {
-        operand2 = Number(display.textContent);
-        operand1 = operate(operand1, operand2, operator);
         operator = evt.target.textContent;
-        display.textContent = operand1;
-        clearOnTextInput = true;
-        operand2 = null;
+        operand2 = Number(display.textContent);
+        if (operator === "/" && operand2 === 0) {
+          display.textContent = "Cannot divide by 0";
+          operand1 = operand2 = null;
+          clearOnTextInput = true;
+        } else {
+          operand1 = operate(operand1, operand2, operator);
+          display.textContent = operand1;
+          clearOnTextInput = true;
+          operand2 = null;
+        }
       } else {
         operator = evt.target.textContent;
       }
@@ -91,11 +97,17 @@ const equalsBtn = document.querySelector(".equals");
 equalsBtn.addEventListener("click", (evt) => {
   if (operand1 && display.textContent) {
     operand2 = Number(display.textContent);
-    operand1 = operate(operand1, operand2, operator);
-    display.textContent = operand1;
-    operand2 = null;
-    operator = null;
-    clearOnTextInput = true;
+    if (operator === "/" && operand2 === 0) {
+      display.textContent = "Cannot divide by 0";
+      operand1 = operand2 = null;
+      clearOnTextInput = true;
+    } else {
+      operand1 = operate(operand1, operand2, operator);
+      display.textContent = operand1;
+      operand2 = null;
+      operator = null;
+      clearOnTextInput = true;
+    }
   }
 });
 
