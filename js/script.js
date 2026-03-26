@@ -42,9 +42,11 @@ buttons.addEventListener(
       clearOnTextInput = false;
     }
 
-    display.textContent += evt.target.classList.contains("operator")
-      ? ""
-      : evt.target.textContent;
+    display.textContent +=
+      evt.target.classList.contains("operator") ||
+      evt.target.classList.contains("equals")
+        ? ""
+        : evt.target.textContent;
   },
   true,
 );
@@ -81,4 +83,17 @@ clearBtn.addEventListener("click", (evt) => {
   operator = null;
   operand2 = null;
   clearOnTextInput = false;
+});
+
+const equalsBtn = document.querySelector(".equals");
+equalsBtn.addEventListener("click", (evt) => {
+  if (operand1 && display.textContent) {
+    operand2 = Number(display.textContent);
+    const result = operate(operand1, operand2, operator);
+    console.log(operand1, operand2, operator);
+    display.textContent = result;
+    operand1 = operand2 = null;
+    operator = null;
+    clearOnTextInput = true;
+  }
 });
